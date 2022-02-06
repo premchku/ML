@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Predict Salary Analysis</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+      MSZoning, Utilities, Neighborhood, Condition1, Condition2, BldgType, HouseStyle, Exterior1st, 
+      Exterior2nd, BsmtQual, BsmtCond, BsmtExposure, BsmtUnfSF, CentralAir, Electrical, BedroomAbvGr, 
+      KitchenAbvGr, KitchenQual, TotRmsAbvGrd, Functional, Fireplaces, FireplaceQu, GarageType, GarageCars, 
+      WoodDeckSF, OpenPorchSF, EnclosedPorch, SaleCondition, Log_GrLivArea, Log_1stFlrSF, Log_LotFrontage, 
+      Sqrt_LotArea, HouseAge, Total_Rooms, GrLivArea_Score, 
+      Total_Square_Feet, Total_Porch, OverallQualCond, BsmtFinSF, TotalBath_Abv, TotalBath_Bsmt, Exter_Overall, Garage_Overall <br>
+    	
+		MSZoning:     <input type="text" align="middle" name="MSZoning" placeholder="MSZoning" required="required" value="4" />
+        Utilities:    <input type="text" name="Utilities" placeholder="Utilities" required="required"value="1" />
+		Neighborhood: <input type="text" name="Neighborhood" placeholder=" Neighborhood" required="required" value="6"/>
+        Condition1:   <input type="text" name="Condition1" placeholder="Condition1" required="required" value="3"/>
+        Condition2:  <input type="text" name="Condition2" placeholder="Condition2" required="required" value="3"/><br><br>
+		
+		BldgType:<input type="text" name="BldgType" placeholder="BldgType" required="required" value="1"/>
+		HouseStyle:<input type="text" name="HouseStyle" placeholder="HouseStyle" required="required" value="6"/>
+        Exterior1st: <input type="text" name="Exterior1st" placeholder="Exterior1st" required="required" value="13" />
+        Exterior2nd:<input type="text" name="Exterior2nd" placeholder="Exterior2nd" required="required"value="14" />
+		BsmtQual:<input type="text" name="BsmtQual" placeholder=" BsmtQual" required="required" value="4"/><br><br>
+		
+		BsmtCond:<input type="text" name="BsmtCond" placeholder="BsmtCond" required="required" value="3"/>
+        BsmtExposure:<input type="text" name="BsmtExposure" placeholder="BsmtExposure" required="required" value="0"/>
+	    BsmtUnfSF:<input type="text" name="BsmtUnfSF" placeholder="BsmtUnfSF" required="required" value="150"/>
+        CentralAir:<input type="text" name="CentralAir" placeholder="CentralAir" required="required" value="2"/>
+        Electrical:<input type="text" name="Electrical" placeholder="Electrical" required="required" value="5" /><br><br>
+		
+		BedroomAbvGr:<input type="text" name="BedroomAbvGr" placeholder="BedroomAbvGr" required="required"value="3" />
+	    KitchenAbvGr:<input type="text" name="KitchenAbvGr" placeholder=" KitchenAbvGr" required="required" value="1"/>
+        KitchenQual:<input type="text" name="KitchenQual" placeholder="KitchenQual" required="required" value="4"/>
+        TotRmsAbvGrd:<input type="text" name="TotRmsAbvGrd" placeholder="TotRmsAbvGrd" required="required" value="8"/>
+	    Functional:<input type="text" name="Functional" placeholder="Functional" required="required" value="7"/><br><br>
+		
+		Fireplaces:<input type="text" name="Fireplaces" placeholder="Fireplaces" required="required" value="0"/>
+		FireplaceQu:<input type="text" name="FireplaceQu" placeholder="FireplaceQu" required="required" value="0"/>
+        GarageType:<input type="text" name="GarageType" placeholder="GarageType" required="required" value="2" />
+        GarageCars:<input type="text" name="GarageCars" placeholder="GarageCars" required="required"value="2" />
+		WoodDeckSF:<input type="text" name="WoodDeckSF" placeholder="WoodDeckSF" required="required" value="0" /><br><br>
+		
+        OpenPorchSF:<input type="text" name="OpenPorchSF" placeholder="OpenPorchSF" required="required"value="61" />
+		EnclosedPorch:<input type="text" name="EnclosedPorch" placeholder="EnclosedPorch" required="required" value="0"/>
+        SaleCondition:<input type="text" name="SaleCondition" placeholder="SaleCondition" required="required" value="5"/>
+        Log_GrLivArea:<input type="text" name="Log_GrLivArea" placeholder="Log_GrLivArea" required="required" value="7"/>
+		Log_1stFlrSF:<input type="text" name="Log_1stFlrSF" placeholder="Log_1stFlrSF" required="required" value="6"/><br><br>
+		
+        Log_LotFrontage:<input type="text" name="Log_LotFrontage" placeholder="Log_LotFrontage" required="required" value="4"/>
+        Sqrt_LotArea: <input type="text" name="Sqrt_LotArea" placeholder="Sqrt_LotArea" required="required" value="9" />
+        HouseAge:<input type="text" name="HouseAge" placeholder="HouseAge" required="required"value="5" />
+		Total_Rooms:<input type="text" name="Total_Rooms" placeholder="Total_Rooms" required="required" value="11"/>
+		GrLivArea_Score:<input type="text" name="GrLivArea_Score" placeholder="GrLivArea_Score" required="required" value="4524"/><br><br>
+		
+        Total_Square_Feet:<input type="text" name="Total_Square_Feet" placeholder="Total_Square_Feet" required="required" value="2566"/>
+	    Total_Porch:<input type="text" name="Total_Porch" placeholder="Total_Porch" required="required" value="61"/>
+        OverallQualCond:<input type="text" name="OverallQualCond" placeholder="OverallQualCond" required="required" value="35"/>
+        BsmtFinSF:<input type="text" name="BsmtFinSF" placeholder="BsmtFinSF" required="required" value="706" />
+		TotalBath_Abv:<input type="text" name="TotalBath_Abv" placeholder="TotalBath_Abv" required="required"value="4" /><br><br>
+		
+	    TotalBath_Bsmt:<input type="text" name="TotalBath_Bsmt" placeholder="TotalBath_Bsmt" required="required" value="2"/>
+        Exter_Overall:<input type="text" name="Exter_Overall" placeholder="Exter_Overall" required="required" value="12"/>
+        Garage_Overall:<input type="text" name="Garage_Overall" placeholder="Garage_Overall" required="required" value="9"/><br><br>
+		
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+
+
+</body>
+</html>
